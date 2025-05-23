@@ -70,5 +70,5 @@ An interactive module that allows players to control game elements using voice c
 > Clone the repository and follow the instructions in each project folder.
 
 ```bash
-git clone https://github.com/yourusername/voice-tech-projects.git
+git clone https://github.com/cmaswin/SPEAK_SMART.git
 cd voice-tech-projects
