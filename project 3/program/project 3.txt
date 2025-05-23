@@ -1,0 +1,38 @@
+!pip install SpeechRecognition pydub
+
+
+from google.colab import files
+
+print("🔁 Upload .wav files (e.g., run.wav, jump.wav, shoot.wav)")
+uploaded = files.upload()
+
+
+import speech_recognition as sr
+
+# Initialize recognizer
+recognizer = sr.Recognizer()
+
+# Iterate through uploaded files
+for filename in uploaded.keys():
+    print(f"\n🎤 Processing: {filename}")
+    with sr.AudioFile(filename) as source:
+        audio = recognizer.record(source)  # read the entire audio file
+
+    try:
+        command = recognizer.recognize_google(audio).lower()
+        print(f"🗣️ Recognized Command: {command}")
+
+        # Simulate Game Action
+        if "run" in command:
+            print("🕹️ Game Action: Player RUNS!")
+        elif "jump" in command:
+            print("🕹️ Game Action: Player JUMPS!")
+        elif "shoot" in command:
+            print("🕹️ Game Action: Player SHOOTS!")
+        else:
+            print("⚠️ Unknown Command!")
+
+    except sr.UnknownValueError:
+        print("❌ Could not understand audio.")
+    except sr.RequestError as e:
+        print(f"❌ API error: {e}")
